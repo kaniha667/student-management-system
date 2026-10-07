@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentHub - Student Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <div class="logo-icon">S</div>
+                <div>
+                    <h2>StudentHub</h2>
+                    <span>Management System</span>
+                </div>
+            </div>
+
+            <nav>
+
+                <a href="#" class="nav-item active" onclick="showPage('dashboard', this)">
+                    <span>▦</span>
+                    Dashboard
+                </a>
+
+                <a href="#" class="nav-item" onclick="showPage('students', this)">
+                    <span>♙</span>
+                    Students
+                </a>
+
+                <a href="#" class="nav-item" onclick="showPage('addStudent', this)">
+                    <span>＋</span>
+                    Add Student
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+                <p>Student Management</p>
+                <small>Academic Records System</small>
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <section id="dashboardPage" class="page active-page">
+
+                <header class="topbar">
+
+                    <div>
+                        <p class="welcome">Welcome back 👋</p>
+                        <h1>Student Dashboard</h1>
+                    </div>
+
+                    <div class="admin-profile">
+                        <div class="avatar">A</div>
+
+                        <div>
+                            <strong>Administrator</strong>
+                            <small>Admin</small>
+                        </div>
+                    </div>
+
+                </header>
+
+
+                <!-- Statistics -->
+                <section class="stats">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon blue">♙</div>
+
+                        <div>
+                            <span>Total Students</span>
+                            <h2 id="studentCount">0</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon green">✓</div>
+
+                        <div>
+                            <span>Active Records</span>
+                            <h2 id="activeCount">0</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon purple">▤</div>
+
+                        <div>
+                            <span>Courses</span>
+                            <h2 id="courseCount">0</h2>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Dashboard Information -->
+                <section class="form-card">
+
+                    <div class="section-header">
+
+                        <div>
+                            <span class="section-label">OVERVIEW</span>
+                            <h2>Student Management Dashboard</h2>
+                        </div>
+
+                    </div>
+
+                    <p style="color:#64748b; font-size:14px; line-height:1.8;">
+                        Manage student records, add new students, update existing
+                        information and search student data using the navigation menu.
+                    </p>
+
+                </section>
+
+            </section>
+
+
+
+            <!-- ================= STUDENTS PAGE ================= -->
+
+            <section id="studentsPage" class="page">
+
+                <header class="topbar">
+
+                    <div>
+                        <p class="welcome">Student Records 👋</p>
+                        <h1>Students</h1>
+                    </div>
+
+                    <div class="admin-profile">
+                        <div class="avatar">A</div>
+
+                        <div>
+                            <strong>Administrator</strong>
+                            <small>Admin</small>
+                        </div>
+                    </div>
+
+                </header>
+
+
+                <section class="students-card">
+
+                    <div class="section-header students-header">
+
+                        <div>
+                            <span class="section-label">DATABASE</span>
+                            <h2>Student Records</h2>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Search and Sort -->
+
+                    <div class="toolbar">
+
+                        <div class="search-wrapper">
+
+                            <span>⌕</span>
+
+                            <input
+                                type="text"
+                                id="searchInput"
+                                placeholder="Search students..."
+                                oninput="searchStudents()"
+                            >
+
+                        </div>
+
+
+                        <select id="sortSelect" onchange="sortStudents()">
+
+                            <option value="">Sort by</option>
+                            <option value="id">ID</option>
+                            <option value="name">Name</option>
+                            <option value="course">Course</option>
+                            <option value="year">Year</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Table -->
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>ID</th>
+                                    <th>STUDENT</th>
+                                    <th>EMAIL</th>
+                                    <th>PHONE</th>
+                                    <th>COURSE</th>
+                                    <th>YEAR</th>
+                                    <th>ACTION</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="studentTableBody">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+
+
+            <!-- ================= ADD STUDENT PAGE ================= -->
+
+            <section id="addStudentPage" class="page">
+
+                <header class="topbar">
+
+                    <div>
+                        <p class="welcome">Student Management 👋</p>
+                        <h1>Add Student</h1>
+                    </div>
+
+                    <div class="admin-profile">
+
+                        <div class="avatar">A</div>
+
+                        <div>
+                            <strong>Administrator</strong>
+                            <small>Admin</small>
+                        </div>
+
+                    </div>
+
+                </header>
+
+
+                <section class="form-card">
+
+                    <div class="section-header">
+
+                        <div>
+                            <span class="section-label">STUDENT MANAGEMENT</span>
+                            <h2 id="formTitle">Add New Student</h2>
+                        </div>
+
+                    </div>
+
+
+                    <form id="studentForm">
+
+                        <input type="hidden" id="studentId">
+
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label>Full Name</label>
+
+                                <input
+                                    type="text"
+                                    id="name"
+                                    placeholder="Enter full name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>Email Address</label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder="student@example.com"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>Phone Number</label>
+
+                                <input
+                                    type="text"
+                                    id="phone"
+                                    placeholder="10-digit phone number"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>Course</label>
+
+                                <input
+                                    type="text"
+                                    id="course"
+                                    placeholder="e.g. B.Tech CSE"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>Academic Year</label>
+
+                                <select id="year" required>
+
+                                    <option value="">Select year</option>
+                                    <option value="1">1st Year</option>
+                                    <option value="2">2nd Year</option>
+                                    <option value="3">3rd Year</option>
+                                    <option value="4">4th Year</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-actions">
+
+                            <button
+                                type="submit"
+                                id="submitBtn"
+                                class="primary-btn"
+                            >
+                                + Add Student
+                            </button>
+
+
+                            <button
+                                type="button"
+                                id="cancelBtn"
+                                class="secondary-btn"
+                                onclick="cancelEdit()"
+                            >
+                                Cancel
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </section>
+
+            </section>
+
+
+            <footer>
+                StudentHub © 2026 | Student Management System
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
